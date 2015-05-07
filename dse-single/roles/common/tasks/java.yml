@@ -1,0 +1,9 @@
+---
+- include_vars: ubuntu_java.yml
+
+- name: Install python-apt (needed for adding DS repos)
+  apt: pkg=python-apt
+
+- name: Install java packages
+  apt: pkg={{ item }} state=latest
+  with_items: java_packages

@@ -1,0 +1,36 @@
+---
+# This playbook deploys the entire single-DC cluster
+
+
+- name: Apply common configuration
+  hosts: all
+  remote_user: root
+
+  roles:
+    - common
+  tags:
+    - common
+
+- name: Set up opscenter
+  hosts: opscenter
+  remote_user: root
+
+  vars_files:
+    - private_vars/email_credentials.yml
+
+  roles:
+    - opscenter
+  tags:
+    - opscenter
+
+- name: Set up DSE
+  hosts: cassandra
+  remote_user: root
+
+  vars_files:
+    - private_vars/dse_credentials.yml
+
+  roles:
+    - cassandra
+  tags:
+    - cassandra

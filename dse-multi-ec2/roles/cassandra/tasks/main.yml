@@ -1,0 +1,47 @@
+---
+- include_vars: cassandra_packages.yml
+
+- name: Download datastax repo key
+  apt_key: url=http://debian.datastax.com/debian/repo_key state=present
+
+- name: Install datastax enterprise repo
+  apt_repository: repo='deb http://{{ dse_site_username}}:{{ dse_site_password }}@debian.datastax.com/enterprise stable main'
+
+- name: Install DSE
+  apt: pkg={{ item }} state=latest
+  with_items: cassandra_packages
+
+- name: Set up Cassandra
+  template: src=cassandra.yaml.j2 dest=/etc/dse/cassandra/cassandra.yaml owner=cassandra group=cassandra mode=0644
+  register: dse_itself
+  tags:
+    - setup
+
+- name: Restart Cassandra
+  service: name=dse state=restarted
+  when: dse_itself.changed
+  tags:
+    - setup
+
+- name: Start Cassandra
+  service: name=dse state=running
+  tags:
+    - setup
+
+- name: Setup DSE agent config
+  template: src=address.yaml.j2 dest=/var/lib/datastax-agent/conf/address.yaml owner=cassandra group=cassandra mode=0644
+  register: dse_agent
+  tags:
+    - setup
+
+- name: Restart DSE agents
+  service: name=datastax-agent state=restarted
+  when: dse_agent.changed
+  tags:
+    - setup
+
+- name: Start DSE agents
+  service: name=datastax-agent state=running
+  tags:
+    - setup
+

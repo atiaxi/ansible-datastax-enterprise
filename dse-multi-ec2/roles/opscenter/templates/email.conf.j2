@@ -1,0 +1,26 @@
+[email]
+# set to 1 to enable email
+enabled={{ alert_enabled }}
+
+# levels can be comma delimited list of any of the following:
+# DEBUG,INFO,WARN,ERROR,CRITICAL,ALERT
+# If left empty, will listen for all levels
+levels=WARN,ERROR,CRITICAL,ALERT
+
+smtp_host={{ smtp_host }}
+smtp_port={{ smtp_port }}
+smtp_user={{ smtp_user }}
+smtp_pass={{ smtp_pass }}
+smtp_use_ssl={{ smtp_use_ssl }}
+smtp_use_tls={{ smtp_use_tls }}
+smtp_retries=1
+smtp_timeout=5
+
+to_addr={{ alert_to_addr }}
+from_addr={{ alert_from_addr }}
+
+# Customizable subject for email.  The key specified in {}'s must map to the items provided in json map at the end of
+# the emails. For example, some available keys are:
+#     node, cluster, datetime, level_str, message, target_node, event_source, success, api_source_ip, user, source_node
+# more advanced formatting options explained here: https://docs.python.org/2/library/string.html#formatspec
+subject=[{level_str}] OpsCenter Event on {cluster} - {message}

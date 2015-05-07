@@ -1,0 +1,15 @@
+---
+- name: Download datastax repo key
+  apt_key: url=http://debian.datastax.com/debian/repo_key state=present
+
+- name: Install datastax community repo
+  apt_repository: repo='deb http://debian.datastax.com/community stable main' state=present
+
+- name: Install Opscenter
+  apt: pkg=opscenter
+
+- name: Configure Opscenter
+  template: src=email.conf.j2 dest=/etc/opscenter/event-plugins/email.conf mode=0644
+
+- name: Run opscenter
+  service: name=opscenterd state=running

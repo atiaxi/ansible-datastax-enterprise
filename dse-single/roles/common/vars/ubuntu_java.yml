@@ -1,0 +1,4 @@
+---
+java_packages:
+  - openjdk-7-jdk
+  - openjdk-7-jdk:i386

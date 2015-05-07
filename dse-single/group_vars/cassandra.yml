@@ -1,0 +1,6 @@
+# These were the IPs when I tested this out; the machines have since
+# been decommissioned so you probably want to put your own IPs here.
+cluster_name: Ansiblicious
+seeds: 172.31.43.74
+stomp: 172.31.43.74
+

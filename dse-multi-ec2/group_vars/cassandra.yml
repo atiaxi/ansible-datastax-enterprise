@@ -1,0 +1,14 @@
+# These were the public IPs when I tested this out; the machines have since
+# been decommissioned so you probably want to put your own IPs here.
+cluster_name: Ansiblicious-Multi
+seeds: 52.6.26.213,52.8.27.174
+stomp: 52.6.26.213
+
+public_ip:
+  east-node-0: 52.6.26.213
+  east-node-1: 52.4.126.48
+  east-node-2: 52.5.21.151
+  west-node-0: 52.8.27.174
+  west-node-1: 52.8.4.138
+  west-node-2: 52.8.78.17
+  opscenter:   52.6.26.213

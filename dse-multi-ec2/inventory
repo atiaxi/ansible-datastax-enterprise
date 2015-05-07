@@ -1,0 +1,10 @@
+[cassandra]
+east-node-0
+east-node-1
+east-node-2
+west-node-0
+west-node-1
+west-node-2
+
+[opscenter]
+east-node-0
