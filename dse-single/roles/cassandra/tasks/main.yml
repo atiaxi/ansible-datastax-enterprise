@@ -17,6 +17,9 @@
   tags:
     - setup
 
+- name: Create Cassandra data directory
+  file: path=/var/lib/cassandra/data state=directory owner=cassandra group=cassandra
+
 - name: Restart Cassandra
   service: name=dse state=restarted
   when: dse_itself.changed
