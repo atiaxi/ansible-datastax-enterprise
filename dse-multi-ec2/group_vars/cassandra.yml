@@ -12,3 +12,5 @@ public_ip:
   west-node-1: 52.8.4.138
   west-node-2: 52.8.78.17
   opscenter:   52.6.26.213
+
+mount_ephemeral: true

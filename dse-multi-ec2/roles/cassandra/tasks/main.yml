@@ -17,6 +17,10 @@
   tags:
     - setup
 
+- name: Mount ephemeral directory
+  mount: name=/var/lib/cassandra src=/dev/xvdb fstype=ext3 state=mounted
+  when: mount_ephemeral
+
 - name: Restart Cassandra
   service: name=dse state=restarted
   when: dse_itself.changed
