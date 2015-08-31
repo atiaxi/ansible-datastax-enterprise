@@ -21,6 +21,9 @@
   mount: name=/var/lib/cassandra src=/dev/xvdb fstype=ext3 state=mounted
   when: mount_ephemeral
 
+- name: Ensure cassandra directory exists and has correct permissions
+  file: path=/var/lib/cassandra state=directory owner=cassandra group=cassandra
+
 - name: Restart Cassandra
   service: name=dse state=restarted
   when: dse_itself.changed
